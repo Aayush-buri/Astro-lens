@@ -217,6 +217,18 @@ export function IdentifyPage() {
     navigate('/guide', { state: { currentObservation: observation } });
   }, [detectedObject, selectedFile, navigate]);
 
+  // Ask AstroLens action
+  const handleAskAstroLens = useCallback(() => {
+    const observation: CurrentObservationState = {
+      objectId: detectedObject.id,
+      objectName: detectedObject.name,
+      confidence: detectedObject.confidence,
+      imagePreview: selectedFile?.previewUrl || null,
+    };
+    saveCurrentObservation(observation);
+    navigate('/assistant', { state: { currentObservation: observation } });
+  }, [detectedObject, selectedFile, navigate]);
+
   // Reset to upload another file
   const handleReset = useCallback(() => {
     handleRemoveFile();
@@ -518,7 +530,7 @@ export function IdentifyPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => navigate('/assistant')}
+                  onClick={handleAskAstroLens}
                   className="w-full text-xs sm:text-sm"
                 >
                   <MessageCircle className="w-3.5 h-3.5 mr-1 text-cyan-600" />

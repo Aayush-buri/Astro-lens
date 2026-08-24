@@ -256,9 +256,63 @@ export const mockGuidance: TelescopeGuidance = {
   verticalDirection: 'UP',
 };
 
+// ─── Object-Specific Suggested Questions ───────────────────────────────────────
+
+export const objectSuggestedPrompts: Record<string, string[]> = {
+  jupiter: [
+    'Why does Jupiter have bands?',
+    'How far away is Jupiter?',
+    'How many moons does Jupiter have?',
+    'What is the Great Red Spot?',
+    'What should I observe next?',
+  ],
+  saturn: [
+    'Why does Saturn have rings?',
+    'How far away is Saturn?',
+    'How many moons does Saturn have?',
+    "Can I see Saturn's moons?",
+    'What should I observe next?',
+  ],
+  moon: [
+    'Why does the Moon have craters?',
+    'Why does the Moon have phases?',
+    'How far away is the Moon?',
+    "Can I see the Moon's surface?",
+    'What should I observe next?',
+  ],
+  mars: [
+    'Why is Mars red?',
+    'Does Mars have moons?',
+    'How far away is Mars?',
+    'Can I see Mars tonight?',
+    'What should I observe next?',
+  ],
+  sirius: [
+    'Why is Sirius so bright?',
+    'How far away is Sirius?',
+    'Is Sirius a binary star?',
+    'What type of star is Sirius?',
+    'What should I observe next?',
+  ],
+  andromeda: [
+    'How far away is Andromeda?',
+    'Can I see Andromeda with a telescope?',
+    'How large is Andromeda?',
+    'Will Andromeda collide with the Milky Way?',
+    'What should I observe next?',
+  ],
+  default: [
+    'What celestial objects can I observe tonight?',
+    'How do I align my telescope?',
+    'What is the best time for stargazing?',
+    'What should I observe next?',
+  ],
+};
+
 // ─── Chat Responses ─────────────────────────────────────────────────────────────
 
 export const mockChatResponses: Record<string, string> = {
+  // ── Saturn Responses ──
   'Why does Saturn have rings?':
     "Saturn's rings are made of billions of pieces of ice, rock, and dust ranging from tiny grains to house-sized chunks. Scientists believe they formed from the remains of comets, asteroids, or moons that were torn apart by Saturn's powerful gravity before they could reach the planet. The rings are incredibly thin compared to their width — if the rings were a sheet of paper, they'd be about the size of a football field!",
   'How far away is Saturn?':
@@ -267,12 +321,70 @@ export const mockChatResponses: Record<string, string> = {
     "As of 2024, Saturn has 146 known moons — more than any other planet in our solar system! The largest is Titan, which is bigger than the planet Mercury and has a thick atmosphere. You might be able to spot Titan through your telescope as a small bright dot near Saturn. Other notable moons include Enceladus, which has geysers of water ice, and Mimas, which looks remarkably like the Death Star from Star Wars!",
   'Can I see Saturn\'s moons?':
     "Yes! With a decent telescope, you can definitely see Titan, Saturn's largest moon. It appears as a bright orange-ish dot near Saturn. With a larger telescope (6 inches or more), you might also spot Rhea, Tethys, Dione, and Enceladus. They'll appear as tiny points of light near the planet. Try looking on a night with steady air (good 'seeing') for the best results.",
+
+  // ── Jupiter Responses ──
+  'Why does Jupiter have bands?':
+    "Jupiter's colorful bands are created by strong atmospheric jet streams flowing in alternating east-west directions at speeds exceeding 400 km/h. The lighter zones are regions of rising gas with ammonia ice clouds, while the darker belts are regions of sinking gas where warmer, deeper atmospheric layers are exposed.",
+  'How far away is Jupiter?':
+    "Jupiter is about 588 to 968 million kilometers (365 to 601 million miles) from Earth depending on our orbital alignment. Sunlight reflecting off Jupiter takes approximately 33 to 53 minutes to travel across space and reach your telescope eyepiece!",
+  'How many moons does Jupiter have?':
+    "As of 2024, Jupiter has 95 officially recognized moons! The four largest — Io, Europa, Ganymede, and Callisto — are the famous Galilean moons. You can easily spot them through almost any small telescope as four bright dots arranged in a line beside the planet.",
+  'What is the Great Red Spot?':
+    "The Great Red Spot is a colossal anticyclonic storm in Jupiter's southern hemisphere that has been churning for over 300 years. It is larger than Earth and produces ferocious winds exceeding 430 km/h. Through your telescope, look for a distinct reddish-salmon oval in the southern equatorial belt.",
+
+  // ── Moon Responses ──
+  'Why does the Moon have craters?':
+    "The Moon has no thick atmosphere, weather, or active plate tectonics to erode its surface. Impact craters gouged out by asteroids and comets billions of years ago remain pristine and preserved, creating the dramatic shadowed terrain you see through your telescope.",
+  'Why does the Moon have phases?':
+    "The Moon doesn't produce its own light; it reflects sunlight. As the Moon orbits Earth every 27.3 days, we see varying fractions of its daylit hemisphere. The boundary between day and night on the Moon is called the terminator, and it offers the sharpest, most dramatic view of craters and peaks!",
+  'How far away is the Moon?':
+    "The Moon is on average 384,400 kilometers (238,855 miles) away from Earth. Moonlight takes only about 1.3 seconds to reach your eyes, making it our closest cosmic neighbor.",
+  'Can I see the Moon\'s surface?':
+    "Yes, in incredible detail! Even with modest magnification, you can explore rugged mountain ranges like the Lunar Apennines, prominent impact craters like Tycho and Copernicus with their radiating splash rays, and vast basaltic volcanic plains called 'maria'.",
+
+  // ── Mars Responses ──
+  'Why is Mars red?':
+    "Mars gets its iconic reddish-orange color from iron oxide (rust) covering its rocks and regolith. Fine dust particles are continuously suspended in its thin carbon dioxide atmosphere, casting a warm rusty glow across the planet.",
+  'Does Mars have moons?':
+    "Yes! Mars has two tiny, potato-shaped moons named Phobos ('Fear') and Deimos ('Dread'), discovered in 1877. Both are likely captured asteroids from the nearby asteroid belt.",
+  'How far away is Mars?':
+    "Mars is on average 225 million kilometers (140 million miles) from Earth, but this distance varies drastically between 54.6 million km during close opposition to over 400 million km when on the opposite side of the Sun.",
+  'Can I see Mars tonight?':
+    "Yes! Through a telescope, Mars appears as a bright reddish-orange disk. With steady atmospheric seeing and decent magnification, you can distinguish its bright white polar ice caps and dark volcanic surface markings like Syrtis Major.",
+
+  // ── Sirius Responses ──
+  'Why is Sirius so bright?':
+    "Sirius is the brightest star in the night sky (magnitude −1.46) for two reasons: it is intrinsically twice as luminous as our Sun and relatively very close to us — only 8.6 light-years away in the constellation Canis Major.",
+  'How far away is Sirius?':
+    "Sirius is located approximately 8.6 light-years (about 81.4 trillion km) from Earth. When you look at Sirius tonight, you are seeing light that left the star nearly 9 years ago.",
+  'Is Sirius a binary star?':
+    "Yes! Sirius is a binary star system consisting of Sirius A (a brilliant blue-white main-sequence star) and Sirius B (nicknamed 'the Pup'), an ultra-dense Earth-sized white dwarf companion with the mass of our Sun.",
+  'What type of star is Sirius?':
+    "Sirius A is an A1V main-sequence star with a blazing surface temperature of roughly 9,940 K, emitting a dazzling bluish-white glow that twinkles vigorously due to Earth's atmospheric turbulence.",
+
+  // ── Andromeda Galaxy Responses ──
+  'How far away is Andromeda?':
+    "The Andromeda Galaxy (M31) is approximately 2.537 million light-years from Earth. It is the most distant celestial object visible to the naked eye under dark skies — the light you see tonight started its journey when early hominids first walked Earth!",
+  'Can I see Andromeda with a telescope?':
+    "Yes! Through a telescope or binoculars, Andromeda appears as a bright, elongated oval glow with a luminous galactic nucleus. Under dark skies, you can spot its dark dust lanes and companion dwarf galaxies M32 and M110.",
+  'How large is Andromeda?':
+    "Andromeda has an estimated diameter of 220,000 light-years — more than double the size of our Milky Way — and contains roughly one trillion stars!",
+  'Will Andromeda collide with the Milky Way?':
+    "Yes! Andromeda and our Milky Way are hurtling toward each other at approximately 110 km/s. In about 4.5 billion years, they will merge in a grand cosmic collision to form a giant elliptical galaxy nicknamed 'Milkdromeda'.",
+
+  // ── General Navigation / Next Observation ──
   'What should I observe next?':
-    "Great question! Based on what's visible tonight, I'd suggest trying the Andromeda Galaxy (M31). It's the most distant object you can see with the naked eye and looks stunning through a telescope. Look for it in the constellation Andromeda — it appears as a fuzzy oval patch of light. Under dark skies, you might even catch hints of its spiral structure. It's about 2.5 million light-years away, so the light you'll see tonight started its journey before humans existed!",
+    "Based on what's visible tonight, I suggest exploring the Andromeda Galaxy (M31) or Saturn's rings. Check the Night Sky page or Guide mode to see exact coordinates and directional instructions from your current position!",
+  'What celestial objects can I observe tonight?':
+    "Tonight offers great visibility for the Moon, Jupiter, Saturn, Sirius, and the Andromeda Galaxy! Head to the Night Sky page to see optimal viewing time windows from your location.",
+  'How do I align my telescope?':
+    "Start by centering a bright landmark or celestial beacon in your finder scope. Once centered, check the eyepiece and adjust your altitude and azimuth slow-motion controls. You can also use AstroLens Guide mode for real-time directional deltas!",
+  'What is the best time for stargazing?':
+    "The best stargazing occurs on clear, moonless nights or during crescent moon phases when lunar glare is minimal. Allow 20 to 30 minutes for your eyes to fully adapt to the dark for the best deep-sky contrast.",
 };
 
 export const defaultChatResponse =
-  "That's a great question! As an AI telescope assistant, I can help you understand what you're observing in the night sky. I can identify celestial objects, provide visibility information, give telescope guidance, and share fascinating facts about the cosmos. Try asking me about specific objects like Saturn's rings, the distance to stars, or what to observe next!";
+  "That's a great astronomy question! As your AI telescope assistant, I can help you understand what you're observing, provide ephemeris coordinates, explain celestial physics, and suggest exciting targets. Try asking about your current observation, planetary atmospheres, or what to view next!";
 
 // ─── Suggested Search Targets ───────────────────────────────────────────────────
 

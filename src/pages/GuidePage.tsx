@@ -550,7 +550,17 @@ export function GuidePage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => navigate('/assistant')}
+                  onClick={() =>
+                    navigate('/assistant', {
+                      state: {
+                        currentObservation: {
+                          objectId: targetKey,
+                          objectName: selectedTarget,
+                          confidence: 91,
+                        },
+                      },
+                    })
+                  }
                   className="w-full text-sm"
                 >
                   <MessageCircle className="w-4 h-4 mr-1.5 text-cyan-600" />

@@ -97,7 +97,17 @@ export function ObjectDetailPage() {
                 <Button
                   variant="outline"
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
-                  onClick={() => navigate('/assistant')}
+                  onClick={() =>
+                    navigate('/assistant', {
+                      state: {
+                        currentObservation: {
+                          objectId: obj.id,
+                          objectName: obj.name,
+                          confidence: 94,
+                        },
+                      },
+                    })
+                  }
                 >
                   <MessageCircle className="w-4 h-4 mr-1.5 text-cyan-300" />
                   <span>Ask AstroLens About {obj.name}</span>
