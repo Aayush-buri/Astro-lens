@@ -55,3 +55,10 @@ export interface ChatMessage {
   content: string;
   timestamp: string;
 }
+
+export interface CurrentObservationState {
+  objectId: string;
+  objectName: string;
+  confidence: number;
+  imagePreview?: string | null;
+}

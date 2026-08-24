@@ -58,6 +58,11 @@ export default {
         'pulse-slow': 'pulse 3s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite',
+        'scan-rotate': 'scanRotate 2.5s linear infinite',
+        'orbit': 'orbitSpin 8s linear infinite',
+        'success-ring': 'successRing 1s ease-out forwards',
+        'twinkle': 'twinkle 3s ease-in-out infinite',
+        'shimmer': 'shimmer 2.5s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -67,6 +72,26 @@ export default {
         glow: {
           '0%, 100%': { opacity: '0.4' },
           '50%': { opacity: '1' },
+        },
+        scanRotate: {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        orbitSpin: {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        successRing: {
+          '0%': { transform: 'scale(0.8)', opacity: '1' },
+          '100%': { transform: 'scale(1.8)', opacity: '0' },
+        },
+        twinkle: {
+          '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.3)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(200%)' },
         },
       },
     },
