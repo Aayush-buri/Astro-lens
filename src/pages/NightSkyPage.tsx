@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { MapPin, Clock, ArrowRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import { tonightVisibility } from '@/data/mockData';
 
 const qualityColors: Record<string, string> = {
@@ -16,13 +17,6 @@ const qualityBadgeColors: Record<string, string> = {
   Good: 'text-blue-700 bg-blue-50',
   Fair: 'text-amber-700 bg-amber-50',
   Poor: 'text-red-600 bg-red-50',
-};
-
-const typeIcons: Record<string, string> = {
-  Moon: '🌙',
-  Planet: '🪐',
-  Star: '⭐',
-  Galaxy: '🌌',
 };
 
 // Parse time like "7:00 PM" to hours for the timeline
@@ -81,7 +75,14 @@ export function NightSkyPage() {
                 Best viewing: {featured.bestViewingStart} – {featured.bestViewingEnd}
               </p>
             </div>
-            <span className="text-4xl">{typeIcons[featured.objectType]}</span>
+            <CelestialObjectVisual
+              objectId={featured.objectId}
+              objectName={featured.objectName}
+              objectType={featured.objectType}
+              visualKey={featured.visualKey}
+              size="lg"
+              variant="badge"
+            />
           </div>
           <Button
             variant="astro"
@@ -152,7 +153,13 @@ export function NightSkyPage() {
                   <h3 className="font-semibold">{vis.objectName}</h3>
                   <p className="text-xs text-muted-foreground">{vis.objectType}</p>
                 </div>
-                <span className="text-2xl">{typeIcons[vis.objectType] || '✨'}</span>
+                <CelestialObjectVisual
+                  objectId={vis.objectId}
+                  objectName={vis.objectName}
+                  objectType={vis.objectType}
+                  visualKey={vis.visualKey}
+                  size="sm"
+                />
               </div>
 
               <span className={`inline-block text-[11px] font-medium px-2 py-0.5 rounded-full ${qualityBadgeColors[vis.quality]}`}>

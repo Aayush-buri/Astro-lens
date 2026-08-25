@@ -3,14 +3,8 @@ import { Clock, Star, Award, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ConfidenceBar } from '@/components/ConfidenceBar';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import { observations, historyStats } from '@/data/mockData';
-
-const typeIcons: Record<string, string> = {
-  Planet: '🪐',
-  Moon: '🌙',
-  Star: '⭐',
-  Galaxy: '🌌',
-};
 
 export function HistoryPage() {
   const navigate = useNavigate();
@@ -61,7 +55,13 @@ export function HistoryPage() {
           >
             <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <span className="text-3xl">{typeIcons[obs.objectType] || '✨'}</span>
+                <CelestialObjectVisual
+                  objectId={obs.objectId}
+                  objectName={obs.objectName}
+                  objectType={obs.objectType}
+                  visualKey={obs.visualKey}
+                  size="md"
+                />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold">{obs.objectName}</h3>

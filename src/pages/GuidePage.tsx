@@ -27,6 +27,7 @@ import { LoadingState } from '@/components/LoadingState';
 import { EmptyState } from '@/components/EmptyState';
 import { WebGLErrorBoundary, SceneFallback } from '@/components/three/WebGLErrorBoundary';
 import { GuidanceScene } from '@/components/three/GuidanceScene';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import {
   getSavedCurrentObservation,
   getCoordinates,
@@ -37,15 +38,6 @@ import { suggestedTargets } from '@/data/mockData';
 import type { CurrentObservationState } from '@/types';
 
 type GuideStep = 'select' | 'checking' | 'guide' | 'moved' | 'verifying' | 'verified' | 'unconfirmed';
-
-const typeEmojis: Record<string, string> = {
-  jupiter: '🪐',
-  saturn: '🪐',
-  moon: '🌙',
-  mars: '🔴',
-  sirius: '⭐',
-  andromeda: '🌌',
-};
 
 export function GuidePage() {
   const navigate = useNavigate();
@@ -144,9 +136,7 @@ export function GuidePage() {
     );
   }
 
-  const currentEmoji = typeEmojis[currentObservation.objectId?.toLowerCase()] || '🪐';
   const targetKey = selectedTarget.toLowerCase().replace(/\s+galaxy$/i, '');
-  const targetEmoji = typeEmojis[targetKey] || '✨';
 
   const HorizontalArrow = guidance.horizontalDirection === 'RIGHT' ? ArrowRightIcon : ArrowLeftIcon;
   const VerticalArrow = guidance.verticalDirection === 'UP' ? ArrowUp : ArrowDown;
@@ -247,8 +237,13 @@ export function GuidePage() {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 flex items-center justify-center text-2xl shadow-xs">
-                      {currentEmoji}
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 flex items-center justify-center shadow-xs">
+                      <CelestialObjectVisual
+                        objectId={currentObservation.objectId}
+                        objectName={currentObservation.objectName}
+                        visualKey={currentObservation.visualKey}
+                        size="md"
+                      />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-foreground">
@@ -307,7 +302,6 @@ export function GuidePage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {filteredSuggestions.map((t) => {
                       const isSelected = selectedTarget.toLowerCase() === t.name.toLowerCase();
-                      const em = typeEmojis[t.id] || '✨';
                       return (
                         <button
                           key={t.id}
@@ -319,7 +313,13 @@ export function GuidePage() {
                           }`}
                         >
                           <div className="flex items-center gap-2 truncate">
-                            <span>{em}</span>
+                            <CelestialObjectVisual
+                              objectId={t.id}
+                              objectName={t.name}
+                              objectType={t.type}
+                              visualKey={t.visualKey}
+                              size="xs"
+                            />
                             <span className="truncate">{t.name}</span>
                           </div>
                           {isSelected && <Check className="w-3.5 h-3.5 text-cyan-600 shrink-0" />}
@@ -374,12 +374,20 @@ export function GuidePage() {
               <div className="p-4 sm:p-5 bg-gradient-to-r from-astro-navy via-astro-deep to-astro-blue text-white flex items-center justify-between">
                 <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-lg">{currentEmoji}</span>
+                    <CelestialObjectVisual
+                      objectId={currentObservation.objectId}
+                      objectName={currentObservation.objectName}
+                      visualKey={currentObservation.visualKey}
+                      size="xs"
+                    />
                     <span>{currentObservation.objectName}</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-cyan-400" />
                   <div className="flex items-center gap-1.5 text-cyan-300">
-                    <span className="text-lg">{targetEmoji}</span>
+                    <CelestialObjectVisual
+                      objectName={selectedTarget}
+                      size="xs"
+                    />
                     <span>{selectedTarget}</span>
                   </div>
                 </div>

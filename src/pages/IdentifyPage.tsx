@@ -17,8 +17,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ConfidenceBar } from '@/components/ConfidenceBar';
 import { LoadingState } from '@/components/LoadingState';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import { saveCurrentObservation } from '@/lib/astronomy';
-import type { CurrentObservationState } from '@/types';
+import type { CurrentObservationState, VisualKey } from '@/types';
 
 type IdentifyStep = 'upload' | 'analyzing' | 'result';
 
@@ -60,27 +61,33 @@ export function IdentifyPage() {
   }, [selectedFile]);
 
   // Derive detected object based on filename or default to Jupiter
-  const detectedObject = useMemo(() => {
+  const detectedObject = useMemo<{
+    id: string;
+    name: string;
+    type: string;
+    confidence: number;
+    visualKey: VisualKey;
+  }>(() => {
     if (!selectedFile) {
-      return { id: 'jupiter', name: 'Jupiter', type: 'Gas Giant Planet', confidence: 94, emoji: '🪐' };
+      return { id: 'jupiter', name: 'Jupiter', type: 'Gas Giant Planet', confidence: 94, visualKey: 'jupiter' };
     }
     const lower = selectedFile.name.toLowerCase();
     if (lower.includes('mars')) {
-      return { id: 'mars', name: 'Mars', type: 'Terrestrial Planet', confidence: 92, emoji: '🔴' };
+      return { id: 'mars', name: 'Mars', type: 'Terrestrial Planet', confidence: 92, visualKey: 'mars' };
     }
     if (lower.includes('saturn')) {
-      return { id: 'saturn', name: 'Saturn', type: 'Ringed Gas Giant', confidence: 96, emoji: '🪐' };
+      return { id: 'saturn', name: 'Saturn', type: 'Ringed Gas Giant', confidence: 96, visualKey: 'saturn' };
     }
     if (lower.includes('moon')) {
-      return { id: 'moon', name: 'Moon', type: 'Natural Satellite', confidence: 98, emoji: '🌙' };
+      return { id: 'moon', name: 'Moon', type: 'Natural Satellite', confidence: 98, visualKey: 'moon' };
     }
     if (lower.includes('sirius')) {
-      return { id: 'sirius', name: 'Sirius', type: 'Binary Star System', confidence: 95, emoji: '⭐' };
+      return { id: 'sirius', name: 'Sirius', type: 'Binary Star System', confidence: 95, visualKey: 'sirius' };
     }
     if (lower.includes('andromeda')) {
-      return { id: 'andromeda', name: 'Andromeda Galaxy', type: 'Spiral Galaxy', confidence: 89, emoji: '🌌' };
+      return { id: 'andromeda', name: 'Andromeda Galaxy', type: 'Spiral Galaxy', confidence: 89, visualKey: 'andromeda' };
     }
-    return { id: 'jupiter', name: 'Jupiter', type: 'Gas Giant Planet', confidence: 94, emoji: '🪐' };
+    return { id: 'jupiter', name: 'Jupiter', type: 'Gas Giant Planet', confidence: 94, visualKey: 'jupiter' };
   }, [selectedFile]);
 
   // Validate and process a selected or dropped file
@@ -197,6 +204,7 @@ export function IdentifyPage() {
       const observation: CurrentObservationState = {
         objectId: detectedObject.id,
         objectName: detectedObject.name,
+        visualKey: detectedObject.visualKey,
         confidence: detectedObject.confidence,
         imagePreview: selectedFile?.previewUrl || null,
       };
@@ -210,6 +218,7 @@ export function IdentifyPage() {
     const observation: CurrentObservationState = {
       objectId: detectedObject.id,
       objectName: detectedObject.name,
+      visualKey: detectedObject.visualKey,
       confidence: detectedObject.confidence,
       imagePreview: selectedFile?.previewUrl || null,
     };
@@ -222,6 +231,7 @@ export function IdentifyPage() {
     const observation: CurrentObservationState = {
       objectId: detectedObject.id,
       objectName: detectedObject.name,
+      visualKey: detectedObject.visualKey,
       confidence: detectedObject.confidence,
       imagePreview: selectedFile?.previewUrl || null,
     };
@@ -479,7 +489,16 @@ export function IdentifyPage() {
                 aria-hidden="true"
               />
               <div className="relative z-10">
-                <span className="text-6xl mb-3 block animate-float">{detectedObject.emoji}</span>
+                <div className="mb-3 flex justify-center">
+                  <CelestialObjectVisual
+                    objectId={detectedObject.id}
+                    objectName={detectedObject.name}
+                    visualKey={detectedObject.visualKey}
+                    size="2xl"
+                    variant="badge"
+                    className="shadow-lg shadow-cyan-500/20"
+                  />
+                </div>
                 <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-2">
                   {detectedObject.type}
                 </span>

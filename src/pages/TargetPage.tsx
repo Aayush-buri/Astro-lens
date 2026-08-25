@@ -17,16 +17,10 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingState } from '@/components/LoadingState';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import { suggestedTargets, tonightVisibility } from '@/data/mockData';
 
 type TargetStep = 'search' | 'checking' | 'result';
-
-const typeIcons: Record<string, string> = {
-  Moon: '🌙',
-  Planet: '🪐',
-  Star: '⭐',
-  Galaxy: '🌌',
-};
 
 const typeColors: Record<string, string> = {
   Planet: 'bg-amber-50 text-amber-700 border-amber-200/60',
@@ -124,7 +118,13 @@ export function TargetPage() {
                   <CardContent className="p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3.5">
                       <div className="w-11 h-11 rounded-xl bg-accent/60 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <span className="text-2xl">{typeIcons[target.type] || '✨'}</span>
+                        <CelestialObjectVisual
+                          objectId={target.id}
+                          objectName={target.name}
+                          objectType={target.type}
+                          visualKey={target.visualKey}
+                          size="sm"
+                        />
                       </div>
                       <div>
                         <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
@@ -195,6 +195,16 @@ export function TargetPage() {
           <Card className="border-border/80 shadow-xl overflow-hidden">
             <CardContent className="p-6 sm:p-8 text-center space-y-6">
               <div>
+                {selectedTarget && (
+                  <div className="flex justify-center mb-3">
+                    <CelestialObjectVisual
+                      objectName={selectedTarget}
+                      size="xl"
+                      variant="badge"
+                      className="shadow-sm"
+                    />
+                  </div>
+                )}
                 <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Astrometric Visibility Result
                 </span>

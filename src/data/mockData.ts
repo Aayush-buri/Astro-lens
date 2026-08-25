@@ -13,6 +13,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'jupiter',
     name: 'Jupiter',
     type: 'planet',
+    visualKey: 'jupiter',
     description:
       'Jupiter is the largest planet in our solar system. Through a telescope, you can see its distinct cloud bands and the Great Red Spot — a storm larger than Earth that has been raging for hundreds of years. You may also spot up to four of its largest moons, known as the Galilean moons.',
     quickFacts: [
@@ -32,6 +33,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'saturn',
     name: 'Saturn',
     type: 'planet',
+    visualKey: 'saturn',
     description:
       'Saturn is famous for its stunning ring system, made of billions of ice and rock particles. Through a telescope, even a small one, you can see the rings extending out from the planet. Saturn also has beautiful cloud bands and over 140 known moons.',
     quickFacts: [
@@ -52,6 +54,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'moon',
     name: 'Moon',
     type: 'moon',
+    visualKey: 'moon',
     description:
       'Our Moon is the easiest celestial object to observe through a telescope. You can see craters, mountains, and vast flat plains called "maria." The best time to observe details is during a crescent or half moon, when shadows highlight the surface features along the terminator line.',
     quickFacts: [
@@ -72,6 +75,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'mars',
     name: 'Mars',
     type: 'planet',
+    visualKey: 'mars',
     description:
       'Mars, the Red Planet, appears as a bright reddish-orange dot in the night sky. Through a telescope, you might see its polar ice caps and darker surface markings. Mars is one of the most studied planets and a prime candidate for future human exploration.',
     quickFacts: [
@@ -91,6 +95,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'sirius',
     name: 'Sirius',
     type: 'star',
+    visualKey: 'sirius',
     description:
       "Sirius, also known as the Dog Star, is the brightest star in the night sky. It's actually a binary star system — Sirius A, a brilliant white main-sequence star, and Sirius B, a faint white dwarf companion. Its twinkling is caused by Earth's atmosphere bending its light.",
     quickFacts: [
@@ -110,6 +115,7 @@ export const celestialObjects: CelestialObject[] = [
     id: 'andromeda',
     name: 'Andromeda Galaxy',
     type: 'galaxy',
+    visualKey: 'andromeda',
     description:
       'The Andromeda Galaxy (M31) is the nearest large galaxy to the Milky Way and the most distant object visible to the naked eye. Through a telescope, you can see its bright core and, under dark skies, hints of its spiral arms. It contains approximately one trillion stars.',
     quickFacts: [
@@ -136,6 +142,7 @@ export const observations: Observation[] = [
     objectId: 'jupiter',
     objectName: 'Jupiter',
     objectType: 'Planet',
+    visualKey: 'jupiter',
     confidence: 94,
     timestamp: '2026-08-22T20:14:00',
     date: '22 Aug',
@@ -146,6 +153,7 @@ export const observations: Observation[] = [
     objectId: 'moon',
     objectName: 'Moon',
     objectType: 'Moon',
+    visualKey: 'moon',
     confidence: 98,
     timestamp: '2026-08-22T19:42:00',
     date: '22 Aug',
@@ -156,6 +164,7 @@ export const observations: Observation[] = [
     objectId: 'saturn',
     objectName: 'Saturn',
     objectType: 'Planet',
+    visualKey: 'saturn',
     confidence: 91,
     timestamp: '2026-08-22T21:03:00',
     date: '22 Aug',
@@ -166,6 +175,7 @@ export const observations: Observation[] = [
     objectId: 'mars',
     objectName: 'Mars',
     objectType: 'Planet',
+    visualKey: 'mars',
     confidence: 87,
     timestamp: '2026-08-21T22:15:00',
     date: '21 Aug',
@@ -176,6 +186,7 @@ export const observations: Observation[] = [
     objectId: 'sirius',
     objectName: 'Sirius',
     objectType: 'Star',
+    visualKey: 'sirius',
     confidence: 96,
     timestamp: '2026-08-20T23:30:00',
     date: '20 Aug',
@@ -190,6 +201,7 @@ export const tonightVisibility: Visibility[] = [
     objectId: 'moon',
     objectName: 'Moon',
     objectType: 'Moon',
+    visualKey: 'moon',
     isVisible: true,
     bestViewingStart: '7:00 PM',
     bestViewingEnd: '2:00 AM',
@@ -201,6 +213,7 @@ export const tonightVisibility: Visibility[] = [
     objectId: 'jupiter',
     objectName: 'Jupiter',
     objectType: 'Planet',
+    visualKey: 'jupiter',
     isVisible: true,
     bestViewingStart: '8:00 PM',
     bestViewingEnd: '11:00 PM',
@@ -212,6 +225,7 @@ export const tonightVisibility: Visibility[] = [
     objectId: 'saturn',
     objectName: 'Saturn',
     objectType: 'Planet',
+    visualKey: 'saturn',
     isVisible: true,
     bestViewingStart: '9:00 PM',
     bestViewingEnd: '11:30 PM',
@@ -223,6 +237,7 @@ export const tonightVisibility: Visibility[] = [
     objectId: 'sirius',
     objectName: 'Sirius',
     objectType: 'Star',
+    visualKey: 'sirius',
     isVisible: true,
     bestViewingStart: '10:00 PM',
     bestViewingEnd: '3:00 AM',
@@ -234,6 +249,7 @@ export const tonightVisibility: Visibility[] = [
     objectId: 'andromeda',
     objectName: 'Andromeda Galaxy',
     objectType: 'Galaxy',
+    visualKey: 'andromeda',
     isVisible: true,
     bestViewingStart: '9:30 PM',
     bestViewingEnd: '1:00 AM',
@@ -389,12 +405,12 @@ export const defaultChatResponse =
 // ─── Suggested Search Targets ───────────────────────────────────────────────────
 
 export const suggestedTargets = [
-  { id: 'moon', name: 'Moon', type: 'Moon' },
-  { id: 'mars', name: 'Mars', type: 'Planet' },
-  { id: 'jupiter', name: 'Jupiter', type: 'Planet' },
-  { id: 'saturn', name: 'Saturn', type: 'Planet' },
-  { id: 'sirius', name: 'Sirius', type: 'Star' },
-  { id: 'andromeda', name: 'Andromeda Galaxy', type: 'Galaxy' },
+  { id: 'moon', name: 'Moon', type: 'Moon', visualKey: 'moon' as const },
+  { id: 'mars', name: 'Mars', type: 'Planet', visualKey: 'mars' as const },
+  { id: 'jupiter', name: 'Jupiter', type: 'Planet', visualKey: 'jupiter' as const },
+  { id: 'saturn', name: 'Saturn', type: 'Planet', visualKey: 'saturn' as const },
+  { id: 'sirius', name: 'Sirius', type: 'Star', visualKey: 'sirius' as const },
+  { id: 'andromeda', name: 'Andromeda Galaxy', type: 'Galaxy', visualKey: 'andromeda' as const },
 ];
 
 // ─── History Stats ──────────────────────────────────────────────────────────────

@@ -1,7 +1,22 @@
+export type VisualKey =
+  | 'jupiter'
+  | 'saturn'
+  | 'moon'
+  | 'mars'
+  | 'venus'
+  | 'sirius'
+  | 'andromeda'
+  | 'nebula'
+  | 'constellation'
+  | 'star'
+  | 'planet'
+  | 'galaxy';
+
 export interface CelestialObject {
   id: string;
   name: string;
   type: 'planet' | 'star' | 'galaxy' | 'nebula' | 'moon' | 'constellation';
+  visualKey?: VisualKey;
   description: string;
   quickFacts: { label: string; value: string }[];
   bestTime: string;
@@ -15,6 +30,7 @@ export interface Observation {
   objectId: string;
   objectName: string;
   objectType: string;
+  visualKey?: VisualKey;
   confidence: number;
   timestamp: string;
   date: string;
@@ -25,6 +41,7 @@ export interface Visibility {
   objectId: string;
   objectName: string;
   objectType: string;
+  visualKey?: VisualKey;
   isVisible: boolean;
   bestViewingStart: string;
   bestViewingEnd: string;
@@ -59,6 +76,7 @@ export interface ChatMessage {
 export interface CurrentObservationState {
   objectId: string;
   objectName: string;
+  visualKey?: VisualKey;
   confidence: number;
   imagePreview?: string | null;
 }

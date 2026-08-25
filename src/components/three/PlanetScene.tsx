@@ -126,6 +126,57 @@ function useProceduralTexture(type: string, baseColorHex: string) {
       ctx.fillStyle = '#f8fafc';
       ctx.fillRect(0, 0, 512, 24); // North cap
       ctx.fillRect(0, 238, 512, 18); // South cap
+    } else if (type === 'venus') {
+      // Venus shrouded golden atmosphere
+      const grad = ctx.createLinearGradient(0, 0, 0, 256);
+      grad.addColorStop(0.0, '#d97706');
+      grad.addColorStop(0.25, '#f59e0b');
+      grad.addColorStop(0.5, '#fef08a');
+      grad.addColorStop(0.75, '#f59e0b');
+      grad.addColorStop(1.0, '#b45309');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 512, 256);
+
+      for (let y = 0; y < 256; y += 8) {
+        ctx.fillStyle = `rgba(255,255,255, 0.08)`;
+        ctx.fillRect(0, y, 512, 4);
+      }
+    } else if (type === 'andromeda' || type === 'galaxy') {
+      // Galaxy spiral disk procedural canvas
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, 512, 256);
+
+      const radGrad = ctx.createRadialGradient(256, 128, 5, 256, 128, 120);
+      radGrad.addColorStop(0.0, '#ffffff');
+      radGrad.addColorStop(0.2, '#e879f9');
+      radGrad.addColorStop(0.5, '#818cf8');
+      radGrad.addColorStop(0.8, '#312e81');
+      radGrad.addColorStop(1.0, 'rgba(15, 23, 42, 0)');
+      ctx.fillStyle = radGrad;
+      ctx.beginPath();
+      ctx.ellipse(256, 128, 220, 100, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Spiral dust bands
+      for (let i = 0; i < 80; i++) {
+        const angle = (i / 80) * Math.PI * 4;
+        const dist = 10 + i * 2.2;
+        const x = 256 + Math.cos(angle) * dist * 1.8;
+        const y = 128 + Math.sin(angle) * dist * 0.8;
+        ctx.beginPath();
+        ctx.arc(x, y, (i % 3) + 1, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+        ctx.fill();
+      }
+    } else if (type === 'nebula') {
+      // Cosmic Nebula gas cloud
+      const nebGrad = ctx.createRadialGradient(256, 128, 10, 256, 128, 140);
+      nebGrad.addColorStop(0.0, '#ec4899');
+      nebGrad.addColorStop(0.35, '#8b5cf6');
+      nebGrad.addColorStop(0.7, '#06b6d4');
+      nebGrad.addColorStop(1.0, '#0f172a');
+      ctx.fillStyle = nebGrad;
+      ctx.fillRect(0, 0, 512, 256);
     } else {
       // Generic celestial body
       ctx.fillStyle = baseColorHex;
@@ -187,6 +238,12 @@ function CelestialBody({ color, name, hasRings = false }: PlanetProps) {
     ? 'moon'
     : lowerName.includes('mars')
     ? 'mars'
+    : lowerName.includes('venus')
+    ? 'venus'
+    : lowerName.includes('andromeda') || lowerName.includes('galaxy')
+    ? 'andromeda'
+    : lowerName.includes('nebula')
+    ? 'nebula'
     : 'generic';
 
   const planetTexture = useProceduralTexture(objType, color);

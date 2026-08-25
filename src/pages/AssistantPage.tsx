@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Send, Bot, User, Sparkles, Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { CelestialObjectVisual } from '@/components/astronomy';
 import {
   mockChatResponses,
   defaultChatResponse,
@@ -164,8 +165,13 @@ export function AssistantPage() {
           {/* Dynamic Active Observation Status */}
           <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-border/40 text-xs">
             {currentObservation ? (
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <CelestialObjectVisual
+                  objectId={currentObservation.objectId}
+                  objectName={currentObservation.objectName}
+                  visualKey={currentObservation.visualKey}
+                  size="xs"
+                />
                 <span>
                   Current object:{' '}
                   <strong className="text-foreground font-semibold">
